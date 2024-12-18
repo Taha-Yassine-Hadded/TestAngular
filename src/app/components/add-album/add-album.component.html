@@ -1,0 +1,19 @@
+<form [formGroup]="album">
+  <div>
+    <label>Titre</label>
+    <input type="text" formControlName="title">
+    <div *ngIf="album.get('title')?.invalid && album.get('title')?.touched && album.get('title')?.dirty" style="color: red">
+      <p *ngIf="album.get('title')?.errors?.['required']">ce champ et obligatoire</p>
+      <p *ngIf="album.get('title')?.errors?.['pattern']">ce champ contient des caractéres et des chiffres uniquement</p>
+    </div>
+  </div>
+  <div>
+    <label>Photo de couverture</label>
+    <textarea formControlName="coverPicture"></textarea>
+    <div *ngIf="album.get('coverPicture')?.invalid && album.get('coverPicture')?.touched && album.get('coverPicture')?.dirty" style="color: red">
+      <p>Minimum 5 caracteres</p>
+    </div>
+  </div>
+  <input type="submit" [disabled]="album.invalid" (click)="addNewAlbum()" value="Ajouter">
+</form>
+
